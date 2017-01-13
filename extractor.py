@@ -17,7 +17,7 @@ class Extractor:
     def openFile(self):
         if os.path.exists(self.filename):
             try:
-                self.file = open(filename)
+                self.file = open(self.filename,"r")
             except:
                 print("Reading error")
                 exit(-1)
@@ -30,12 +30,12 @@ class Extractor:
         targetRow = [self.filename, str(self.extract())]
         writer = None
         f = None
-        if !os.path.exists(self.targetDirectory+"/ExecutorCount.csv"):
-            f = open(self.targetDirectory"/ExecutorCount.csv","w")
+        if not os.path.exists(self.targetDirectory+"/ExecutorCount.csv"):
+            f = open(self.targetDirectory+"/ExecutorCount.csv","w")
             writer = csv.writer(f, delimiter=',', lineterminator='\n')
             writer.writerow(headers)
         else:
-            f = open(self.targetDirectory"/ExecutorCount.csv","a")
+            f = open(self.targetDirectory+"/ExecutorCount.csv","a")
             writer = csv.writer(f, delimiter=',', lineterminator='\n')
 
         writer.writerow(targetRow)
@@ -49,7 +49,7 @@ class Extractor:
                 data = json.loads(line)
                 event = data["Event"]
                 if event == "SparkListenerExecutorAdded":
-                    counter++
+                    counter=counter + 1
             except:
                 print("Json parsing error")
                 exit(-1)
