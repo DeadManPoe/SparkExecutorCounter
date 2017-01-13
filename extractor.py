@@ -63,7 +63,8 @@ def main():
         print("Required args: [LOG_FILE] [TARGET_DIRECTORY_FOR_RESULTS]")
         exit(-1)
     else:
-        parser = SparkParser(str(args[1]),str(args[2]))
+        extractor = Extractor(str(args[1]),str(args[2]))
+        extractor.run()
 
 if __name__ == "__main__":
     main()
